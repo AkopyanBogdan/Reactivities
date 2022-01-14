@@ -28,10 +28,12 @@ namespace API
                  
                  await Seed.SeedData(context);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 var logger = services.GetRequiredService<ILogger<Program>>();
-                logger.LogError(ex, "An error occured during migration");
+                logger.LogError(
+                    $"{nameof(Program)}.{nameof(Main)} - Failed occured during migration. " +
+                    $"Exeption: {e}");
             }
 
             await host.RunAsync();
